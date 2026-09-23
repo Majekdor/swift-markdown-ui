@@ -90,3 +90,6 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
+
+# Local tooling
+.memsearch/
