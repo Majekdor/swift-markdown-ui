@@ -2,10 +2,7 @@ import SwiftUI
 
 struct NumberedListView: View {
   @Environment(\.theme.list) private var list
-  @Environment(\.theme.numberedListMarker) private var numberedListMarker
   @Environment(\.listLevel) private var listLevel
-
-  @State private var markerWidth: CGFloat?
 
   private let isTight: Bool
   private let start: Int
@@ -33,16 +30,10 @@ struct NumberedListView: View {
   }
 
   private var label: some View {
-    ListItemSequence(
-      items: self.items,
-      start: self.start,
-      markerStyle: self.numberedListMarker,
-      markerWidth: self.markerWidth
+    FlatListView(
+      list: .numberedList(isTight: self.isTight, start: self.start, items: self.items),
+      level: self.listLevel + 1
     )
-    .environment(\.listLevel, self.listLevel + 1)
     .environment(\.tightSpacingEnabled, self.isTight)
-    .onColumnWidthChange { columnWidths in
-      self.markerWidth = columnWidths[0]
-    }
   }
 }
